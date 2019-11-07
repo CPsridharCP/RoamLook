@@ -17,10 +17,8 @@
 // On seeing a known face Misty greets and smiles... while on seeing an unknown face misty takes a picture and saves it
 
 misty.Debug("Centering Head");
-misty.MoveHeadPosition(-5, 0, 0, 100);
-misty.MoveArmPosition("left", 0, 45);
-misty.Pause(50);
-misty.MoveArmPosition("right", 0, 45);
+misty.MoveHeadDegrees(0, 0, 0, 100);
+misty.MoveArmDegrees("both", 90, 100);
 
 misty.StartFaceRecognition();
 registerFaceRec();
@@ -42,23 +40,17 @@ function _FaceRec(data){
         misty.DisplayImage("Disdainful.png");
         misty.PlayAudio("007-Surprised_Ahhh.wav");
         misty.TakePicture(false, "Intruder", 1200, 1600, false, true);
-        misty.MoveArmPosition("left", 5, 45);
-        misty.Pause(50);
-        misty.MoveArmPosition("right", 5, 45);
+        misty.MoveArmDegrees("both", 0, 100);
     } else if (faceDetected == "YOUR NAME HERE") {
         misty.ChangeLED(148, 0, 211);
         misty.DisplayImage("Happy.png");
         misty.PlayAudio("015-Meow.wav"); // This line could be replaced with an api to call google voics / mistys text to speech
-        misty.MoveArmPosition("left", 10, 45);
-        misty.Pause(50);
-        misty.MoveArmPosition("right", 10, 45);
+        misty.MoveArmDegrees("both", -26, 100);
     } else {
         misty.ChangeLED(148, 0, 211);
         misty.DisplayImage("Wonder.png");
         misty.PlayAudio("gtcu.wav");
-        misty.MoveArmPosition("left", 10, 45);
-        misty.Pause(50);
-        misty.MoveArmPosition("right", 10, 45);
+        misty.MoveArmDegrees("both", -26, 100);
     }
 
     misty.Set("FaceDetectedAt",(new Date()).toUTCString());
@@ -72,9 +64,7 @@ while (true) {
     if (misty.Get("Initiated") && secondsPast(misty.Get("FaceDetectedAt")) > 7.0){
         misty.DisplayImage("Homeostasis.png");
         misty.Set("Initiated",false);
-        misty.MoveArmPosition("left", 0, 45);
-        misty.Pause(50);
-        misty.MoveArmPosition("right", 0, 45);
+        misty.MoveArmDegrees("both", 90, 100);
         misty.Drive(15,20);
         misty.Pause(1000);
         registerFaceRec();
