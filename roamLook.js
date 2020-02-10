@@ -34,7 +34,7 @@ function registerFaceRec(){
 
 function _FaceRec(data){
     misty.Drive(0, 0);
-    var faceDetected = data.PropertyTestResults[0].PropertyValue;
+    var faceDetected = data.PropertyTestResults[0].PropertyValue.Label;
     if (faceDetected == "unknown person"){
         misty.ChangeLED(255, 0, 0);
         misty.DisplayImage("Disdainful.png");
